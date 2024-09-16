@@ -23,7 +23,6 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         docker buildx build \
-          --platform linux/amd64 \
           --build-arg COMMIT_HASH=${{ env.COMMIT_HASH }} \
           -t zach27/file-to-json:${{ env.COMMIT_HASH }} \
           -t zach27/file-to-json:latest \
