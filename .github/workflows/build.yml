@@ -1,4 +1,5 @@
-name : Build and Push to Docker Hub
+name: Build and Push Docker Image
+
 on:
   push:
     branches:
@@ -9,21 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
 
     - name: Login to Docker Hub
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-
 
     - name: Extract Commit Hash
       id: get_commit
       run: echo "COMMIT_HASH=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
 
-    - name: Build and Push  Docker Image
+    - name: Build and Push Docker Image
       run: |
         docker buildx build \
           --platform linux/amd64 \
@@ -32,5 +29,3 @@ jobs:
           -t zach27/file-to-json:latest \
           --push \
           ./
-
-
