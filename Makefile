@@ -5,4 +5,4 @@ push :
 	docker push zach27/file-to-json:latest
 run :
 	docker run -p 8501:8501 streamlit-app-file-to-json
-build-run : build run
+build-run : build run 
