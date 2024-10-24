@@ -19,6 +19,7 @@ jobs:
 
   build-and-push-to-docker-hub:
     runs-on: ubuntu-latest
+    needs: cancel-previous-runs
 
     steps:
     - name: Checkout Code
